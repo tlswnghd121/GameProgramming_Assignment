@@ -8,7 +8,7 @@ public class ShootControl: MonoBehaviour
     [Header("Preset Fields")]
     [SerializeField] public Camera PlayerCam;
     [SerializeField] GameObject HitEffect;
-    [SerializeField] GameObject bullet;
+    //[SerializeField] GameObject bullet;
 
     [Header("Settings")]
     [SerializeField][Range(15f, 50f)] private float damage = 25.0f;

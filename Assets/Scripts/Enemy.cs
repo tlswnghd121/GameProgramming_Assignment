@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour
                         nextState = State.Idle;
                     }
                     break;
-                //insert code here...
+                
             }
         }
         
@@ -104,14 +104,11 @@ public class Enemy : MonoBehaviour
                 case State.Wander:
                     Wander();
                     break;
-                //insert code here...
+                
             }
         }
 
-        //3. 글로벌 & 스테이트 업데이트
-        //insert code here...
-
-        //+--- [0320] 임시 Idle ---+//
+       
         //IdleMove();
     }
     
@@ -120,7 +117,7 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("idle");
     }
 
-    private void Attack() //현재 공격은 애니메이션만 작동합니다.
+    private void Attack() //현재 공격은 애니메이션만 작동
     {
         animator.SetTrigger("attack");
     }
@@ -151,7 +148,7 @@ public class Enemy : MonoBehaviour
         return Physics.CheckSphere(transform.position, attackRange, 1 << 6, QueryTriggerInteraction.Ignore);
     }
 
-    //+--- [0320]Task 1-1 ---+//
+    
     public void TakeDamage (float amount) 
     {
         CurHealth -= amount;
@@ -169,7 +166,7 @@ public class Enemy : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
+    
     //private void IdleMove()
     //{
     //    Vector3 vec = CurPos;
@@ -180,12 +177,12 @@ public class Enemy : MonoBehaviour
     //}
 
 
-    public void InstantiateFx() //Unity Animation Event 에서 실행됩니다.
+    public void InstantiateFx() //Unity Animation Event 에서 실행
     {
         Instantiate(splashFx, transform.position, Quaternion.identity);
     }
     
-    public void WhenAnimationDone() //Unity Animation Event 에서 실행됩니다.
+    public void WhenAnimationDone() //Unity Animation Event 에서 실행
     {
         attackDone = true;
     }
@@ -193,8 +190,8 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        //Gizmos를 사용하여 공격 범위를 Scene View에서 확인할 수 있게 합니다. (인게임에서는 볼 수 없습니다.)
-        //해당 함수는 없어도 기능 상의 문제는 없지만, 기능 체크 및 디버깅을 용이하게 합니다.
+        //Gizmos를 사용하여 공격 범위를 Scene View에서 확인할 수 있게 (인게임에서는 볼 수 없음)
+        //해당 함수는 없어도 기능 상의 문제는 없지만, 기능 체크 및 디버깅을 용이
         Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
         Gizmos.DrawSphere(transform.position, attackRange);
     }

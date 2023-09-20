@@ -70,12 +70,17 @@ public class GameManager : MonoBehaviour
                 int pointIdx = UnityEngine.Random.Range(1, enemyPoints.Count);
                 int enemyIdx = UnityEngine.Random.Range(0, enemies.Length);
 
-                Instantiate(enemies[enemyIdx], enemyPoints[pointIdx].position, enemyPoints[pointIdx].rotation, GameObject.Find("Enemies").transform);
+                GameObject newEnemy = Instantiate(enemies[enemyIdx], enemyPoints[pointIdx].position, enemyPoints[pointIdx].rotation, GameObject.Find("Enemies").transform);
+
+                // 10초 뒤에 적을 파괴
+                Destroy(newEnemy, 10.0f);
 
             }
             else yield return null;
         }
     }
+
+
 
     void Update()
     {
