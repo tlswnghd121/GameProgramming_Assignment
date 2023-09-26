@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Init();                         // GameManager Init
-        //ItemManager.instance.Init();    // ItemManager Init
+        
     }
 
     public void Init()

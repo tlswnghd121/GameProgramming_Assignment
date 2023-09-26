@@ -17,7 +17,6 @@ public class ShootControl: MonoBehaviour
 
     void Update()
     {
-        
         if (Input.GetMouseButtonDown(0))
         {
             Shoot();

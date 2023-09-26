@@ -6,7 +6,7 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerFire: MonoBehaviour
+public class PlayerFire : MonoBehaviour
 {
 
 
@@ -56,9 +56,6 @@ public class PlayerFire: MonoBehaviour
                 //카메라의 정면 방향으로 무기에 물리적 힘을 가함
                 rb.AddForce(Camera.main.transform.forward * throwPower, ForceMode.Impulse);
 
-
-
-
                 //코루틴 함수 실행
                 StartCoroutine(CountAttackDelay());
             }
@@ -81,7 +78,7 @@ public class PlayerFire: MonoBehaviour
         }
 
 
-
+        /*
 
         //마우스 왼쪽 버튼 입력
         if (Input.GetMouseButtonDown(0))
@@ -117,11 +114,12 @@ public class PlayerFire: MonoBehaviour
             }
         }
     }
+*/
+        IEnumerator CountAttackDelay()
+        {
+            yield return new WaitForSeconds(delayTime);
+            isDelay = false;
 
-    IEnumerator CountAttackDelay()
-    {
-        yield return new WaitForSeconds(delayTime);
-        isDelay = false;
-
+        }
     }
 }
