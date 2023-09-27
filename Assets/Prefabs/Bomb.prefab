@@ -101,7 +101,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -148,3 +148,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombEffect: {fileID: 345039643704011177, guid: 66ddc1985cdbc92438b63d9461d3c2d1,
     type: 3}
+  bombdamage: 100

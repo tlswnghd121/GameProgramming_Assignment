@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     [Header("Preset Fields")] 
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject splashFx;
-    //[SerializeField] private HealthBar healthBar;
+    [SerializeField] private HealthBar healthBar;
     
     [Header("Settings")]
     [SerializeField] private float attackRange;
@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
         nextState = State.Idle;
 
         CurHealth = MaxHealth;
-        //healthBar.UpdateHealthBar(MaxHealth, CurHealth, 0);
+        healthBar.UpdateHealthBar(MaxHealth, CurHealth);
 
         CurPos = transform.position;
     }
@@ -153,12 +153,12 @@ public class Enemy : MonoBehaviour
     {
         CurHealth -= amount;
 
-       //healthBar.UpdateHealthBar(MaxHealth, CurHealth, amount);
+       healthBar.UpdateHealthBar(MaxHealth, CurHealth);
 
         if (CurHealth <= 0.0f) 
         {
             Die();
-            //GameManager.instance.killEnemy++;
+            GameManager.instance.killEnemy++;
         }
     }
 

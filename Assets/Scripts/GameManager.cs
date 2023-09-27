@@ -18,7 +18,11 @@ public class GameManager : MonoBehaviour
     public int goal = 5;            // goal -> Fin Game
 
     public bool isGameOver = false;
-    //public GameObject GameFinUI;
+    public GameObject GameFinUI;
+    public bool isGameLose = false;
+
+    private float gameTimer = 0.0f;
+    public float gameDuration = 30.0f; // 게임 지속 시간 (30초)
 
     public static GameManager instance = null;
 
@@ -72,8 +76,8 @@ public class GameManager : MonoBehaviour
 
                 GameObject newEnemy = Instantiate(enemies[enemyIdx], enemyPoints[pointIdx].position, enemyPoints[pointIdx].rotation, GameObject.Find("Enemies").transform);
 
-                // 10초 뒤에 적을 파괴
-                Destroy(newEnemy, 10.0f);
+                // 10초 뒤에 적을 자동 파괴
+                //Destroy(newEnemy, 10.0f);
 
             }
             else yield return null;
@@ -84,14 +88,38 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if (!isGameOver)
+        {
+            gameTimer += Time.deltaTime; // 게임 경과 시간 증가
+
+            if (gameTimer >= gameDuration)
+            {
+                // 게임 지속 시간이 30초 이상이면 'LoseMenu' 씬으로 전환
+                isGameLose = true;
+                SceneManager.LoadScene("LoseMenu");
+
+                // 게임 종료 UI를 띄움
+                UnityEngine.Cursor.visible = true;
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+
+            }
+        }
+
         if (killEnemy >= goal && isGameOver == false)
         {
             isGameOver = true;
+            if (isGameOver)
+            {
+                SceneManager.LoadScene("WinMenu");
+            }
 
+
+            
             // 게임 종료 UI를 띄움
             UnityEngine.Cursor.visible = true;
             UnityEngine.Cursor.lockState = CursorLockMode.None;
             //Instantiate(GameFinUI, GameObject.Find("Canvas").transform.position, Quaternion.identity, GameObject.Find("Canvas").transform);
+        
         }
 
         if (Input.GetKeyDown(KeyCode.X))
@@ -112,11 +140,12 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene("Assignment");
+        SceneManager.LoadScene("Assignment1");
 
         killEnemy = 0;
         isGameOver = false;
-
+        isGameLose = false;
+        gameTimer = 0.0f; // 게임 시간 초기화
         // Manager Init
         enemyPoints.Clear();
         instance.Init();

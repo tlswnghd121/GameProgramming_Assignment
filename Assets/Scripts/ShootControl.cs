@@ -34,7 +34,7 @@ public class ShootControl: MonoBehaviour
             Enemy target = hit.transform.GetComponent<Enemy>();
             if (target != null)
             {
-                //target.TakeDamage(damage);
+                target.TakeDamage(damage);
             }
             /*
             Vector3 dir = hit.transform.position - muzzle.transform.position;
