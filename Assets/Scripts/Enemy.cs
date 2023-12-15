@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.UIElements;
+//using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SocialPlatforms;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Rendering.InspectorCurveEditor;
+//using static UnityEditor.PlayerSettings;
+//using static UnityEditor.Rendering.InspectorCurveEditor;
 using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
@@ -26,6 +26,12 @@ public class Enemy : MonoBehaviour
 
     private bool chooseDir = false;
     public int randomDir;
+
+    [Header("Audio")]
+    public AudioSource enemyAudioSource;
+    public AudioClip attackSound;
+    public AudioClip deathSound;
+
 
     public enum State 
     {
@@ -50,6 +56,10 @@ public class Enemy : MonoBehaviour
         healthBar.UpdateHealthBar(MaxHealth, CurHealth);
 
         CurPos = transform.position;
+
+        enemyAudioSource = gameObject.AddComponent<AudioSource>();
+        enemyAudioSource.playOnAwake = false;
+        enemyAudioSource.spatialBlend = 1.0f; // 3D sound
     }
 
     private void Update()
@@ -120,6 +130,13 @@ public class Enemy : MonoBehaviour
     private void Attack() //현재 공격은 애니메이션만 작동
     {
         animator.SetTrigger("attack");
+
+        if (IsPlayerInRange())
+        {
+            // 플레이어가 범위 내에 있으면 공격 사운드 재생
+            enemyAudioSource.PlayOneShot(attackSound);
+        }
+
     }
 
     private void Wander()
@@ -164,6 +181,10 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        // 사망 시 사운드 재생
+        enemyAudioSource.PlayOneShot(deathSound);
+
+
         Destroy(gameObject);
     }
     

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using TMPro;
-using UnityEditor.PackageManager;
+//using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,7 +21,7 @@ public class PlayerFire : MonoBehaviour
     public int bombPower = 15;
 
     //총알 이펙트 오브젝트
-    public GameObject bulletEffect;
+    //public GameObject bulletEffect;
     //총알 이펙트 파티클 시스템
     ParticleSystem ps;
     //총알 공격력
@@ -33,11 +33,13 @@ public class PlayerFire : MonoBehaviour
     public float delayTime = 5f;
     float timer = 0f;
 
+    public AudioSource bombAudioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        ps = bulletEffect.GetComponent<ParticleSystem>();
+        //ps = bulletEffect.GetComponent<ParticleSystem>();
+        bombAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -55,6 +57,7 @@ public class PlayerFire : MonoBehaviour
                 Rigidbody rb = bomb.GetComponent<Rigidbody>();
                 //카메라의 정면 방향으로 무기에 물리적 힘을 가함
                 rb.AddForce(Camera.main.transform.forward * throwPower, ForceMode.Impulse);
+                bombAudioSource.Play();
 
                 //코루틴 함수 실행
                 StartCoroutine(CountAttackDelay());

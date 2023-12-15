@@ -19,11 +19,14 @@ public class CameraControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        mouseX += Input.GetAxis("Mouse X") * sensitivity;
-        playerTransform.rotation = Quaternion.Euler(new Vector3(0, mouseX, 0));
-        
-        mouseY += Input.GetAxis("Mouse Y") * sensitivity;
-        mouseY = Mathf.Clamp(mouseY, -75f, 75f);
-        transform.localRotation = Quaternion.Euler(new Vector3(-mouseY, 0, 0));
+        if (!GameManager.Instance().IsPaused) // GameManager에서 isPaused에 접근 가능한 메서드 추가 필요
+        {
+            mouseX += Input.GetAxis("Mouse X") * sensitivity;
+            playerTransform.rotation = Quaternion.Euler(new Vector3(0, mouseX, 0));
+
+            mouseY += Input.GetAxis("Mouse Y") * sensitivity;
+            mouseY = Mathf.Clamp(mouseY, -75f, 75f);
+            transform.localRotation = Quaternion.Euler(new Vector3(-mouseY, 0, 0));
+        }
     }
 }

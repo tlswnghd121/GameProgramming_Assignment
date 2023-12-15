@@ -638,6 +638,9 @@ MonoBehaviour:
   moveSpeed: 10
   rotateSpeed: 100
   randomDir: 0
+  enemyAudioSource: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 4c30f7128fae52245a8cd992a449e7a1, type: 3}
+  deathSound: {fileID: 0}
   state: 0
   nextState: 0
 --- !u!95 &7694791775399974010

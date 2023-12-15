@@ -15,6 +15,13 @@ public class ShootControl: MonoBehaviour
     [SerializeField] private float range = 100.0f;
     [SerializeField] public GameObject muzzle;
 
+    public AudioSource gunAudioSource;
+
+    void Start()
+    {
+        gunAudioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -44,6 +51,7 @@ public class ShootControl: MonoBehaviour
             */
             GameObject effect = Instantiate(HitEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(effect, 1.0f);
+            gunAudioSource.Play();
         }
     }
 }
